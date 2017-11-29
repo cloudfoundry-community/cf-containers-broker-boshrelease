@@ -1,0 +1,6 @@
+---
+blobstore:
+  provider: s3
+  options:
+    bucket_name: cf-containers-broker-boshrelease
+final_name: cf-containers-broker
