@@ -8,6 +8,27 @@ addons:
     release: bpm
 
 instance_groups:
+- name: subway
+  azs: [z1]
+  instances: 1
+  vm_type: default
+  stemcell: default
+  networks: [{name: default}]
+  jobs:
+  - name: subway-broker
+    release: cf-subway
+    consumes:
+      backend:
+        from: backend
+    provides:
+      subway:
+        as: broker
+        shared: true
+    properties:
+      username: broker
+      password: ((subway-broker-password))
+      name: docker-broker
+
 - name: docker
   azs: [z1,z2,z3]
   instances: 1
@@ -28,7 +49,7 @@ instance_groups:
     release: cf-containers-broker
     provides:
       cf-containers-broker:
-        as: cf-containers-broker
+        as: backend
         shared: true
     properties:
       username: broker
@@ -50,9 +71,9 @@ instance_groups:
     release: cf-containers-broker
     consumes:
       servicebroker:
-        from: cf-containers-broker
+        from: broker
       docker-broker-catalog:
-        from: cf-containers-broker
+        from: backend
   - name: docker
     release: docker
     properties:
@@ -62,6 +83,8 @@ instance_groups:
       tls_key: "((docker-tls.private_key))"
 
 variables:
+- name: subway-broker-password
+  type: password
 - name: docker-broker-password
   type: password
 - name: docker-broker-cookie-secret
@@ -95,6 +118,10 @@ releases:
 - name: bpm
   version: 0.2.0
   url: git+https://github.com/cloudfoundry-incubator/bpm-release
+- name: cf-subway
+  version: 3.2.0
+  url: https://bosh.io/d/github.com/cloudfoundry-community/cf-subway-boshrelease?v=3.2.0
+  sha1: 57de13d5a7b4709c065b6f909cd86372badfe2da
 - name: docker
   version: 30.1.5
   url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v30.1.5/docker-30.1.5.tgz
