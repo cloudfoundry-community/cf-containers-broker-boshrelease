@@ -7,8 +7,10 @@ processes:
   persistent_disk: false
   env:
     PORT: <%= p("port") %>
+    DOCKER_URL: <%= p("docker_url") %>
+
   limits:
     memory: 256M
     open_files: 1024
-
-# example at https://github.com/cloudfoundry-incubator/bpm-release/blob/master/jobs/bpm-test-agent/templates/bpm.yml.erb
+  additional_volumes:
+  - path: /var/vcap/data/sys/run/docker

@@ -10,17 +10,14 @@ working_directory '/var/vcap/packages/cf-containers-broker'
 # listen on a TCP port
 listen <%= p('port') %>, :tcp_nopush => true
 
-# location of the pid file
-pid '/var/vcap/sys/run/cf-containers-broker/cf-containers-broker.pid'
-
 # nuke workers after 120 seconds instead of 60 seconds (the default)
 timeout 120
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, ome applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path '/var/vcap/sys/log/cf-containers-broker/cf-containers-broker.stderr.log'
-stdout_path '/var/vcap/sys/log/cf-containers-broker/cf-containers-broker.stdout.log'
+stderr_path '/var/vcap/data/cf-containers-broker/tmp/logs/cf-containers-broker.stderr.log'
+stdout_path '/var/vcap/data/cf-containers-broker/tmp/logs/cf-containers-broker.stdout.log'
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
