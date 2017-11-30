@@ -1,0 +1,81 @@
+---
+- type: replace
+  path: /releases/-
+  value:
+    name: broker-registrar
+    version: 3.4.0
+    url: git+https://github.com/cloudfoundry-community/broker-registrar-boshrelease
+
+- type: replace
+  path: /releases/-
+  value:
+    name: routing
+    version: 0.147.0
+    url: git+https://github.com/cloudfoundry-incubator/cf-routing-release
+
+- type: replace
+  path: /instance_groups/name=subway/jobs/-
+  value:
+    release: routing
+    name: route_registrar
+    consumes:
+      nats:
+        deployment: cf
+        from: nats
+    properties:
+      route_registrar:
+        routes:
+        - name: ((broker-route-name)) # deployment name
+          port: 8000
+          registration_interval: 20s
+          uris: [((broker-route-uri))]
+
+- type: replace
+  path: /instance_groups/name=docker/jobs/name=cf-containers-broker/properties/external_host?
+  value: ((broker-route-uri))
+
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: broker-registrar
+    instances: 1
+    azs: [z1]
+    lifecycle: errand
+    vm_type: default
+    stemcell: default
+    networks: [{name: default}]
+    jobs:
+    - name: broker-registrar
+      release: broker-registrar
+      consumes:
+        servicebroker:
+          from: broker
+      properties:
+        cf:
+          api_url: ((cf-api-url))
+          username: ((cf-admin-username))
+          password: ((cf-admin-password))
+          skip_ssl_validation: ((cf-skip-ssl-validation))
+
+- type: replace
+  path: /instance_groups/-
+  value:
+    name: broker-deregistrar
+    instances: 1
+    azs: [z1]
+    lifecycle: errand
+    vm_type: default
+    stemcell: default
+    networks: [{name: default}]
+    jobs:
+    - name: broker-deregistrar
+      release: broker-registrar
+      consumes:
+        servicebroker:
+          from: broker
+      properties:
+        cf:
+          api_url: ((cf-api-url))
+          username: ((cf-admin-username))
+          password: ((cf-admin-password))
+          skip_ssl_validation: ((cf-skip-ssl-validation))
