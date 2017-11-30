@@ -1,3 +1,11 @@
+eden-cli/eden-0.6.0-linux-amd64:
+  size: 8454425
+  object_id: 12d91aa4-45eb-4675-5f1e-e86f8cba6ec1
+  sha: 5faa96193b1568eddd5e1f73bcfc7b1d6abfdb81
+jq/jq-linux64-1.5:
+  size: 3027945
+  object_id: ebcc7c81-8667-4f1d-6fbf-62fef3347153
+  sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
 ruby/bundler-1.16.0.gem:
   size: 350208
   object_id: 9656124c-b4d1-4a54-6030-709fa2a199d1
