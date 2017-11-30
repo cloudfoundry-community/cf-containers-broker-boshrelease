@@ -10,7 +10,12 @@ This repository includes base manifests and operator files. They can be used for
 export BOSH_ENVIRONMENT=<bosh-alias>
 export BOSH_DEPLOYMENT=cf-containers-broker
 git clone https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease.git
-bosh deploy cf-containers-broker-boshrelease/manifests/cf-containers-broker.yml
+bosh deploy cf-containers-broker-boshrelease/manifests/cf-containers-broker.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/redis32.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/postgresql96.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/mysql56.yml
+
+bosh run-errand sanity-test
 ```
 
 If your BOSH does not have Credhub/Config Server, then remember `--vars-store` to allow generation of passwords and certificates.
@@ -25,5 +30,10 @@ export BOSH_DEPLOYMENT=cf-containers-broker
 cd cf-containers-broker-boshrelease
 git pull
 cd -
-bosh deploy cf-containers-broker-boshrelease/manifests/cf-containers-broker.yml
+bosh deploy cf-containers-broker-boshrelease/manifests/cf-containers-broker.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/redis32.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/postgresql96.yml \
+  -o cf-containers-broker-boshrelease/manifests/operators/services/mysql56.yml
+
+bosh run-errand sanity-test
 ```

@@ -28,5 +28,16 @@ export no_proxy="<%= no_proxy %>"
 <% end %>
 
 cd /var/vcap/packages/cf-containers-broker
+
+<% if_p('fetch_images') do %>
+# Fetch new/updated container images on restart
+bundle exec fetch_container_images
+<% end %>
+
+<% if_p('update_containers') do %>
+# Restart containers with latest image/config on restart
+bundle exec update_all_containers
+<% end %>
+
 bundle exec unicorn \
         -c /var/vcap/jobs/cf-containers-broker/config/unicorn.conf.rb
