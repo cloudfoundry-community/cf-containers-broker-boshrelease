@@ -1,0 +1,14 @@
+---
+processes:
+- name: cf-containers-broker
+  executable: /var/vcap/jobs/cf-containers-broker/bin/ctl.sh
+  args: []
+  ephemeral_disk: true
+  persistent_disk: false
+  env:
+    PORT: <%= p("port") %>
+  limits:
+    memory: 256M
+    open_files: 1024
+
+# example at https://github.com/cloudfoundry-incubator/bpm-release/blob/master/jobs/bpm-test-agent/templates/bpm.yml.erb

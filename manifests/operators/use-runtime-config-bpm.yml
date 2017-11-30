@@ -1,0 +1,5 @@
+- type: remove
+  path: /releases/name=bpm
+
+- type: remove
+  path: /addons/name=bpm

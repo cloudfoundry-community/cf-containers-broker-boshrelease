@@ -1,0 +1,5 @@
+check process cf-containers-broker
+  with pidfile /var/vcap/sys/run/bpm/cf-containers-broker/cf-containers-broker.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start cf-containers-broker"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop cf-containers-broker"
+  group vcap
