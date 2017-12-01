@@ -123,9 +123,9 @@ releases:
   url: https://bosh.io/d/github.com/cloudfoundry-community/cf-subway-boshrelease?v=3.2.0
   sha1: 57de13d5a7b4709c065b6f909cd86372badfe2da
 - name: docker
-  version: 30.1.5
-  url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v30.1.5/docker-30.1.5.tgz
-  sha1: cc1536949e5e9d857d13ba2ed0781636a46f81da
+  version: 31.0.0
+  url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v31.0.0/docker-31.0.0.tgz
+  sha1: 5d7e9052297b26ad4337b4d539ba702cccb20080
 - name: cf-containers-broker
   version: 1.0.0
   url: https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease/releases/download/v1.0.0/cf-containers-broker-1.0.0.tgz
