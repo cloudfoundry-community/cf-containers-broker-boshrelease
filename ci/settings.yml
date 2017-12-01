@@ -6,6 +6,7 @@ meta:
   test-errand: sanity-test
 
   manifest:
+    path:   manifests/docker-broker.yml
     operator_file_paths: "manifests/operators/services/redis32.yml,manifests/operators/services/postgresql96.yml" # comma separated list relative to repo root
 
   initial_version: 1.0.0
