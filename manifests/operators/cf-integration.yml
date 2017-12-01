@@ -42,7 +42,7 @@
     azs: [z1]
     lifecycle: errand
     vm_type: minimal
-    stemcell: default
+    stemcell: trusty
     networks: [{name: default}]
     jobs:
     - name: broker-registrar
@@ -65,7 +65,7 @@
     azs: [z1]
     lifecycle: errand
     vm_type: minimal
-    stemcell: default
+    stemcell: trusty
     networks: [{name: default}]
     jobs:
     - name: broker-deregistrar
