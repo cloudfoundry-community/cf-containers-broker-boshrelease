@@ -41,7 +41,7 @@
     instances: 1
     azs: [z1]
     lifecycle: errand
-    vm_type: default
+    vm_type: minimal
     stemcell: default
     networks: [{name: default}]
     jobs:
@@ -64,7 +64,7 @@
     instances: 1
     azs: [z1]
     lifecycle: errand
-    vm_type: default
+    vm_type: minimal
     stemcell: default
     networks: [{name: default}]
     jobs:
