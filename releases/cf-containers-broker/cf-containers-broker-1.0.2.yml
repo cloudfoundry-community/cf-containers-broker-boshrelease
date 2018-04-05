@@ -1,0 +1,39 @@
+name: cf-containers-broker
+version: 1.0.2
+commit_hash: 3ec8891
+uncommitted_changes: false
+jobs:
+- name: cf-containers-broker
+  version: 8963ad4c96387fa90c01eb040e35b02a8bc30e9b
+  fingerprint: 8963ad4c96387fa90c01eb040e35b02a8bc30e9b
+  sha1: 914d23859e74f714b9563169b0842b8185d5de3b
+- name: sanity-test-broker
+  version: f33a1ae660c9741d959f8a406d7343b7f92d21e2
+  fingerprint: f33a1ae660c9741d959f8a406d7343b7f92d21e2
+  sha1: f1865969ab434bafe527ca51f1bf661a8815d8c3
+packages:
+- name: cf-containers-broker
+  version: 3d786e87514512e7c673224b5d12a2e03cfcb1ae
+  fingerprint: 3d786e87514512e7c673224b5d12a2e03cfcb1ae
+  sha1: 0abeeb30815080994262f2d88c9038356d33681c
+  dependencies:
+  - ruby-2.4-r3
+- name: eden-cli
+  version: 2100e595cd2a4f23a85eb1d67478d890af484ecf
+  fingerprint: 2100e595cd2a4f23a85eb1d67478d890af484ecf
+  sha1: 1e62a9bb92272591dcedaec13631bb6e1e942b27
+  dependencies: []
+- name: jq
+  version: f502bfc65e67f129d21866f86e68f8458bd0ae28
+  fingerprint: f502bfc65e67f129d21866f86e68f8458bd0ae28
+  sha1: 85089bdc4af903ed0c40203585f13512a355e7c6
+  dependencies: []
+- name: ruby-2.4-r3
+  version: cebf400204829301022dc07ba193fda8401f14b1
+  fingerprint: cebf400204829301022dc07ba193fda8401f14b1
+  sha1: e0ea17dbfc358efa417062aaa9349a27542df6d2
+  dependencies: []
+license:
+  version: ac77a509d8b020148f8ce7b3ecce592f89c29c87
+  fingerprint: ac77a509d8b020148f8ce7b3ecce592f89c29c87
+  sha1: 4b907f09a74dda2658938124f398e1c630f8adef
