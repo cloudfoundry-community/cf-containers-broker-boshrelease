@@ -39,7 +39,7 @@ This repository includes base manifests and operator files. They can be used for
 
 ```
 export BOSH_ENVIRONMENT=<bosh-alias>
-export BOSH_DEPLOYMENT=cf-containers-broker
+export BOSH_DEPLOYMENT=docker-broker
 git clone https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease.git
 bosh deploy cf-containers-broker-boshrelease/manifests/cf-containers-broker.yml \
   -o cf-containers-broker-boshrelease/manifests/operators/services/redis32.yml \
@@ -57,7 +57,7 @@ When new versions of `redis-boshrelease` are released the `manifests/cf-containe
 
 ```
 export BOSH_ENVIRONMENT=<bosh-alias>
-export BOSH_DEPLOYMENT=cf-containers-broker
+export BOSH_DEPLOYMENT=docker-broker
 cd cf-containers-broker-boshrelease
 git pull
 cd -

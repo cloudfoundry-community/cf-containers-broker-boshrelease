@@ -6,19 +6,3 @@ jq/jq-linux64-1.5:
   size: 3027945
   object_id: ebcc7c81-8667-4f1d-6fbf-62fef3347153
   sha: d8e36831c3c94bb58be34dd544f44a6c6cb88568
-ruby/bundler-1.16.0.gem:
-  size: 350208
-  object_id: 9656124c-b4d1-4a54-6030-709fa2a199d1
-  sha: cb3c531fd27f82a7525224e4315418757056dc67
-ruby/ruby-2.4.2.tar.gz:
-  size: 14187859
-  object_id: 66150a64-f490-4ac6-5dbc-8378adc93088
-  sha: b096124469e31e4fc3d00d2b61b11d36992e6bbd
-ruby/rubygems-2.7.3.tgz:
-  size: 849187
-  object_id: 34aa40ca-3528-42de-4bf5-3d04c537f756
-  sha: 0f2b8ca36246eb8fa2c5e6b555ae3202fdf3e998
-ruby/yaml-0.1.7.tar.gz:
-  size: 527518
-  object_id: 7c2e4559-d2b1-4a7c-5d29-19f2ae5891af
-  sha: 3590cbf092ef4c71bc0a9b404c00a626b1e04dee

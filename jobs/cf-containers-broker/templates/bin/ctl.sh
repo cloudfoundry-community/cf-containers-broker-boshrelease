@@ -2,8 +2,9 @@
 
 set -eu
 
+source /var/vcap/packages/ruby-2.4-r3/bosh/runtime.env
+
 export PATH=$PATH:/var/vcap/packages/cf-containers-broker/bin
-export PATH=$PATH:/var/vcap/packages/ruby/bin
 
 export RAILS_ENV=production
 export BUNDLE_GEMFILE=/var/vcap/packages/cf-containers-broker/Gemfile
