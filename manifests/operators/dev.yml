@@ -1,6 +1,0 @@
----
-- type: replace
-  path: /releases/name=cf-containers-broker
-  value:
-    name: cf-containers-broker
-    version: latest

@@ -4,4 +4,4 @@
   value:
     name: cf-containers-broker
     version: create
-    url: .
+    url: file://.
