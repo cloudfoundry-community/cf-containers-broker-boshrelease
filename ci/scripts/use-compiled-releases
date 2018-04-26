@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ROOT=$PWD
-
 set -eu
 
 git clone ${REPO_ROOT} ${REPO_OUT}
@@ -16,14 +14,17 @@ fi
 STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
 STEMCELL_VERSION=$(cat stemcell/version)
 
+tar -xzf compiled-releases/*.tgz $( tar -tzf compiled-releases/*.tgz | grep 'release.MF' )
+RELEASE_NAME=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+RELEASE_VERSION=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+
+RELEASE_URL=$(cat compiled-releases/url)
+RELEASE_SHA1=$(sha1sum compiled-releases/*.tgz | awk '{print $1}')
 pushd ${REPO_OUT}
-  tar -xzf ${ROOT}/compiled-releases/*.tgz $( tar -tzf compiled-releases/*.tgz | grep 'release.MF' )
-  RELEASE_NAME=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
-  RELEASE_VERSION=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+  ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
+popd
 
-  RELEASE_URL=$(cat ${ROOT}/compiled-releases/url)
-  RELEASE_SHA1=$(sha1sum ${ROOT}/compiled-releases/*.tgz | awk '{print $1}')
-
+pushd ${REPO_OUT}
   ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
 
   git merge --no-edit ${BRANCH}
