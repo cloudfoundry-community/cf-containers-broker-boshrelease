@@ -1,6 +1,6 @@
 ---
 name: cf-containers-broker
 dependencies:
-  - ruby-2.4-r3
+  - ruby-2.4-r4
 files:
   - cf-containers-broker/**/*

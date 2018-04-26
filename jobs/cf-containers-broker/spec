@@ -2,7 +2,7 @@
 name: cf-containers-broker
 
 packages:
-- ruby-2.4-r3
+- ruby-2.4-r4
 - cf-containers-broker
 
 templates:
