@@ -14,24 +14,6 @@ STEMCELL_VERSION=$(cat stemcell/version)
 
 git clone ${REPO_ROOT} ${REPO_OUT}
 
-cat > ${REPO_OUT}/manifests/operators/use-compiled-releases.yml <<-YAML
-- path: /releases/name=${RELEASE_NAME}/url
-  type: replace
-  value: "${RELEASE_URL}"
-- path: /releases/name=${RELEASE_NAME}/version
-  type: replace
-  value: "${RELEASE_VERSION}"
-- path: /releases/name=${RELEASE_NAME}/sha1
-  type: replace
-  value: "${RELEASE_SHA1}"
-
-- path: /releases/name=${RELEASE_NAME}/stemcell?
-  type: replace
-  value:
-    os: "${STEMCELL_OS}"
-    version: "${STEMCELL_VERSION}"
-YAML
-
 if [[ -z $(git config --global user.email) ]]; then
   git config --global user.email "${GIT_EMAIL}"
 fi
@@ -39,7 +21,9 @@ if [[ -z $(git config --global user.name) ]]; then
   git config --global user.name "${GIT_NAME}"
 fi
 
-pushd $REPO_OUT
+pushd ${REPO_OUT}
+  ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
+
   git merge --no-edit ${BRANCH}
   git add -A
   git status

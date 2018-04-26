@@ -105,7 +105,7 @@ variables:
 stemcells:
 - alias: trusty
   os: ubuntu-trusty
-  version: latest
+  version: 3541.latest
 
 update:
   canaries: 1
