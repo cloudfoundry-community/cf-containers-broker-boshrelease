@@ -2,7 +2,7 @@
 
 set -eu
 
-source /var/vcap/packages/ruby-2.4-r3/bosh/runtime.env
+source /var/vcap/packages/ruby-2*/bosh/runtime.env
 
 export PATH=$PATH:/var/vcap/packages/cf-containers-broker/bin
 
