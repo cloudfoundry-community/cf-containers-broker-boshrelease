@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ROOT=$PWD
+
 set -eu
 
 git clone ${REPO_ROOT} ${REPO_OUT}
@@ -15,7 +17,7 @@ STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
 STEMCELL_VERSION=$(cat stemcell/version)
 
 pushd ${REPO_OUT}
-  tar -xzf compiled-releases/*.tgz $( tar -tzf compiled-releases/*.tgz | grep 'release.MF' )
+  tar -xzf ${ROOT}/compiled-releases/*.tgz $( tar -tzf compiled-releases/*.tgz | grep 'release.MF' )
   RELEASE_NAME=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
   RELEASE_VERSION=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
 
