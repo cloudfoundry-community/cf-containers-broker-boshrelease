@@ -127,6 +127,6 @@ releases:
   url: https://github.com/cloudfoundry-community/docker-boshrelease/releases/download/v31.0.0/docker-31.0.0.tgz
   version: 31.0.0
 - name: cf-containers-broker
-  sha1: 5c3cba3e88d669a84c4c4074919fb234b6aa74a5
-  url: https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease/releases/download/v1.0.2/cf-containers-broker-1.0.2.tgz
-  version: 1.0.2
+  sha1: 11001a58965ce4243bd18f0e4301cdbbe949a2d9
+  url: https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease/releases/download/v1.0.3/cf-containers-broker-1.0.3.tgz
+  version: 1.0.3
