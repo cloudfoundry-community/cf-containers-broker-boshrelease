@@ -21,8 +21,8 @@ pushd ${REPO_OUT}
   RELEASE_NAME=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
   RELEASE_VERSION=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
 
-  RELEASE_URL=$(cat compiled-releases/url)
-  RELEASE_SHA1=$(sha1sum compiled-releases/*.tgz | awk '{print $1}')
+  RELEASE_URL=$(cat ${ROOT}/compiled-releases/url)
+  RELEASE_SHA1=$(sha1sum ${ROOT}/compiled-releases/*.tgz | awk '{print $1}')
 
   ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
 
