@@ -14,19 +14,22 @@ fi
 STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
 STEMCELL_VERSION=$(cat stemcell/version)
 
-tar -xzf compiled-releases/*.tgz $( tar -tzf compiled-releases/*.tgz | grep 'release.MF' )
-RELEASE_NAME=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
-RELEASE_VERSION=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+releases=($(ls -d *compiled-release))
 
-RELEASE_URL=$(cat compiled-releases/url)
-RELEASE_SHA1=$(sha1sum compiled-releases/*.tgz | awk '{print $1}')
+for release in "${releases[@]}"; do
+
+  tar -xzf $release/*.tgz $( tar -tzf $release/*.tgz | grep 'release.MF' )
+  release_name=$( grep -E '^name: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+  release_version=$( grep -E '^version: ' release.MF | awk '{print $2}' | tr -d "\"'" )
+  release_url=$(cat $release/url)
+  release_sha1=$(sha1sum $release/*.tgz | awk '{print $1}')
+
+  pushd ${REPO_OUT}
+    ci/scripts/update-manifest-release $release_name $release_version $release_url $release_sha1
+  popd
+done
+
 pushd ${REPO_OUT}
-  ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
-popd
-
-pushd ${REPO_OUT}
-  ci/scripts/update-manifest-release $RELEASE_NAME $RELEASE_VERSION $RELEASE_URL $RELEASE_SHA1
-
   git merge --no-edit ${BRANCH}
   git add -A
   git status

@@ -405,9 +405,9 @@ jobs:
             BOSH_CA_CERT:         (( grab meta.bosh-lite.cacert ))
             BOSH_CLIENT:          (( grab meta.bosh-lite.username ))
             BOSH_CLIENT_SECRET:   (( grab meta.bosh-lite.password ))
-      - put: compiled-releases
+      - put: compiled-release
         params:
-          file: "compiled-release/compiled-releases/*.tgz"
+          file: (( concat "compiled-release/compiled-releases/" meta.name "/*.tgz" ))
 
   - name: use-compiled-releases
     plan:
@@ -419,8 +419,10 @@ jobs:
         - get: ubuntu-trusty-stemcell-3541
           passed: [compile-release-3541]
           params: {tarball: false}
-        - get: compiled-releases
+        - get: compiled-release
           passed: [compile-release-3541]
+        - get: docker-compiled-release
+          passed: [docker-compile-release]
       - task: use-compiled-releases
         config:
           platform: linux
@@ -435,7 +437,8 @@ jobs:
               path: stemcell
             - name: github
               path: release
-            - name: compiled-releases
+            - name: compiled-release
+            - name: docker-compiled-release
           outputs:
             - name: pushme
           run:
@@ -518,11 +521,11 @@ resources:
       name: bosh-warden-boshlite-ubuntu-trusty-go_agent
       version_family: 3541.latest
 
-  - name: compiled-releases
+  - name: compiled-release
     type: s3
     source:
       bucket:            (( grab meta.aws.bucket ))
       region_name:       (( grab meta.aws.region_name ))
       access_key_id:     (( grab meta.aws.access_key ))
       secret_access_key: (( grab meta.aws.secret_key ))
-      regexp:            "compiled-releases/.*-(\\d+).tgz"
+      regexp:            (( concat "compiled-releases/" meta.name "/.*-(\\d+).tgz" ))
