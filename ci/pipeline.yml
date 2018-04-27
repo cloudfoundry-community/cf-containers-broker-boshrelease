@@ -52,6 +52,10 @@ meta:
     password:   (( param "Please specify the BOSH Director admin password" ))
     deployment:    (( concat meta.name "-testflight" ))
     deployment-pr: (( concat meta.name "-testflight-pr" ))
+    stemcell:
+      cpi: warden-boshlite
+
+  bosh: (( grab meta.bosh-lite ))
 
   slack:
     webhook:       (( param "Please specify your Slack Incoming Webhook Integration URL" ))
@@ -70,8 +74,10 @@ groups:
       - testflight-pr
       - rc
       - shipit
-      - compile-release-3541
+  - name: compiled-releases
+    jobs:
       - use-compiled-releases
+      - compile-release
   - name: versioning
     jobs:
       - major
@@ -374,7 +380,7 @@ jobs:
           icon_url: (( grab meta.slack.icon ))
           text:    '(( concat meta.slack.fail_url " " meta.pipeline ": shipit job failed" ))'
 
-  - name: compile-release-3541
+  - name: compile-release
     plan:
       - aggregate:
         - get: git
@@ -405,25 +411,26 @@ jobs:
             BOSH_CA_CERT:         (( grab meta.bosh-lite.cacert ))
             BOSH_CLIENT:          (( grab meta.bosh-lite.username ))
             BOSH_CLIENT_SECRET:   (( grab meta.bosh-lite.password ))
+            STEMCELL_CPI:         (( grab meta.bosh.stemcell.cpi ))
       - put: compiled-release
         params:
           file: (( concat "compiled-release/compiled-releases/" meta.name "/*.tgz" ))
 
   - name: use-compiled-releases
     plan:
-      - aggregate:
+      - name: aggregate
+        aggregate:
         - get: git
         - get: github
-          passed: [compile-release-3541]
-          trigger: true
+          passed: [compile-release]
         - get: ubuntu-trusty-stemcell-3541
-          passed: [compile-release-3541]
+          passed: [compile-release]
           params: {tarball: false}
         - get: compiled-release
-          passed: [compile-release-3541]
-        - get: docker-compiled-release
-          passed: [docker-compile-release]
-      - task: use-compiled-releases
+          passed: [compile-release]
+          trigger: true
+      - name: use-compiled-releases
+        task: use-compiled-releases
         config:
           platform: linux
           image_resource:
@@ -438,7 +445,6 @@ jobs:
             - name: github
               path: release
             - name: compiled-release
-            - name: docker-compiled-release
           outputs:
             - name: pushme
           run:
