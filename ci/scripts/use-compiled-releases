@@ -33,5 +33,5 @@ pushd ${REPO_OUT}
   git merge --no-edit ${BRANCH}
   git add -A
   git status
-  git commit -m "Updated compiled releases v${RELEASE_VERSION} for ${STEMCELL_OS}/${STEMCELL_VERSION}"
+  git commit -m "Updated compiled releases for ${STEMCELL_OS}/${STEMCELL_VERSION}"
 popd
