@@ -117,17 +117,29 @@ update:
 releases:
 - name: bpm
   sha1: 6d99c62b0993e4f8ff747faa62f91b4288cc27bf
+  stemcell:
+    os: ubuntu-trusty
+    version: "3541.12"
   url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/bpm/bpm-0.5.0-ubuntu-trusty-3541.12-20180427-023829-890304456-20180427023837.tgz
   version: 0.5.0
 - name: cf-subway
   sha1: 70b1ec6bc9a44ebcfe5ce2f89c1bcdf4c7d08f81
+  stemcell:
+    os: ubuntu-trusty
+    version: "3541.12"
   url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/cf-subway/cf-subway-3.2.0-ubuntu-trusty-3541.12-20180427-023906-453709332-20180427023911.tgz
   version: 3.2.0
 - name: docker
   sha1: 9396ffc58da6724b7d656809c062a7a862e5973a
+  stemcell:
+    os: ubuntu-trusty
+    version: "3541.12"
   url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/docker/docker-32.0.0-ubuntu-trusty-3541.12-20180427-000536-650949482-20180427000544.tgz
   version: 32.0.0
 - name: cf-containers-broker
   sha1: 16a27577419810515c8596aa0d431943c5581ce9
+  stemcell:
+    os: ubuntu-trusty
+    version: "3541.12"
   url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/cf-containers-broker/cf-containers-broker-1.0.3-ubuntu-trusty-3541.12-20180427-023757-468867249-20180427023801.tgz
   version: 1.0.3
