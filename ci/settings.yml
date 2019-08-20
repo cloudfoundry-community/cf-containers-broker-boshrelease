@@ -19,12 +19,6 @@ meta:
     email:  ((git-commit-email))
     name:   ((git-commit-name))
 
-  bosh-lite:
-    target:   ((bosh-lite-environment))
-    cacert:   ((bosh-lite-ca-cert))
-    username: ((bosh-lite-client))
-    password: ((bosh-lite-client-secret))
-
   aws:
     bucket:      (( grab meta.pipeline ))
     region_name: us-east-1
@@ -57,8 +51,9 @@ groups:
 jobs:
 - name: use-compiled-releases
   plan:
-    - name: aggregate
-      aggregate:
+    - name: resources
+      in_parallel:
+        steps:
         - (( append ))
         - get: docker-compiled-release
           passed: [docker-compile-release]
@@ -66,7 +61,7 @@ jobs:
           passed: [bpm-compile-release]
         - get: cf-subway-compiled-release
           passed: [cf-subway-compile-release]
-    - name: use-compiled-releases
+    - task: use-compiled-releases
       config:
         inputs:
           - (( append ))
@@ -78,13 +73,12 @@ jobs:
   public: true
   serial: true
   plan:
-    - aggregate:
-      - get: git
-      - get: github
-        resource: docker-boshrelease
-        trigger: true
-      - get: ubuntu-trusty-stemcell-3541
-        params: {tarball: false}
+    - get: git
+    - get: github
+      resource: docker-boshrelease
+      trigger: true
+    - get: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
+      params: {tarball: false}
     - task: export-release
       config:
         platform: linux
@@ -95,7 +89,7 @@ jobs:
             tag:        (( grab meta.image.tag ))
         inputs:
           - name: git
-          - name: ubuntu-trusty-stemcell-3541
+          - name: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
             path: stemcell
           - name: github
             path: release
@@ -104,11 +98,10 @@ jobs:
         run:
           path: git/ci/scripts/export-release
         params:
-          BOSH_ENVIRONMENT:   (( grab meta.bosh-lite.target ))
-          BOSH_CA_CERT:       (( grab meta.bosh-lite.cacert ))
-          BOSH_CLIENT:        (( grab meta.bosh-lite.username ))
-          BOSH_CLIENT_SECRET: (( grab meta.bosh-lite.password ))
-          STEMCELL_CPI:       (( grab meta.bosh.stemcell.cpi ))
+          BOSH_ENVIRONMENT:   (( grab meta.bosh.target ))
+          BOSH_CA_CERT:       (( grab meta.bosh.cacert ))
+          BOSH_CLIENT:        (( grab meta.bosh.username ))
+          BOSH_CLIENT_SECRET: (( grab meta.bosh.password ))
     - put: docker-compiled-release
       params:
         file: "compiled-release/compiled-releases/docker/*.tgz"
@@ -117,13 +110,12 @@ jobs:
   public: true
   serial: true
   plan:
-    - aggregate:
-      - get: git
-      - get: github
-        resource: bpm-release
-        trigger: true
-      - get: ubuntu-trusty-stemcell-3541
-        params: {tarball: false}
+    - get: git
+    - get: github
+      resource: bpm-release
+      trigger: true
+    - get: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
+      params: {tarball: false}
     - task: export-release
       config:
         platform: linux
@@ -134,7 +126,7 @@ jobs:
             tag:        (( grab meta.image.tag ))
         inputs:
           - name: git
-          - name: ubuntu-trusty-stemcell-3541
+          - name: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
             path: stemcell
           - name: github
             path: release
@@ -143,11 +135,10 @@ jobs:
         run:
           path: git/ci/scripts/export-release
         params:
-          BOSH_ENVIRONMENT:   (( grab meta.bosh-lite.target ))
-          BOSH_CA_CERT:       (( grab meta.bosh-lite.cacert ))
-          BOSH_CLIENT:        (( grab meta.bosh-lite.username ))
-          BOSH_CLIENT_SECRET: (( grab meta.bosh-lite.password ))
-          STEMCELL_CPI:       (( grab meta.bosh.stemcell.cpi ))
+          BOSH_ENVIRONMENT:   (( grab meta.bosh.target ))
+          BOSH_CA_CERT:       (( grab meta.bosh.cacert ))
+          BOSH_CLIENT:        (( grab meta.bosh.username ))
+          BOSH_CLIENT_SECRET: (( grab meta.bosh.password ))
     - put: bpm-compiled-release
       params:
         file: "compiled-release/compiled-releases/bpm/*.tgz"
@@ -156,13 +147,12 @@ jobs:
   public: true
   serial: true
   plan:
-    - aggregate:
-      - get: git
-      - get: github
-        resource: cf-subway-boshrelease
-        trigger: true
-      - get: ubuntu-trusty-stemcell-3541
-        params: {tarball: false}
+    - get: git
+    - get: github
+      resource: cf-subway-boshrelease
+      trigger: true
+    - get: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
+      params: {tarball: false}
     - task: export-release
       config:
         platform: linux
@@ -173,7 +163,7 @@ jobs:
             tag:        (( grab meta.image.tag ))
         inputs:
           - name: git
-          - name: ubuntu-trusty-stemcell-3541
+          - name: (( concat meta.bosh.stemcell.os "-stemcell-" meta.bosh.stemcell.major ))
             path: stemcell
           - name: github
             path: release
@@ -182,11 +172,10 @@ jobs:
         run:
           path: git/ci/scripts/export-release
         params:
-          BOSH_ENVIRONMENT:   (( grab meta.bosh-lite.target ))
-          BOSH_CA_CERT:       (( grab meta.bosh-lite.cacert ))
-          BOSH_CLIENT:        (( grab meta.bosh-lite.username ))
-          BOSH_CLIENT_SECRET: (( grab meta.bosh-lite.password ))
-          STEMCELL_CPI:       (( grab meta.bosh.stemcell.cpi ))
+          BOSH_ENVIRONMENT:   (( grab meta.bosh.target ))
+          BOSH_CA_CERT:       (( grab meta.bosh.cacert ))
+          BOSH_CLIENT:        (( grab meta.bosh.username ))
+          BOSH_CLIENT_SECRET: (( grab meta.bosh.password ))
     - put: cf-subway-compiled-release
       params:
         file: "compiled-release/compiled-releases/cf-subway/*.tgz"
