@@ -1,7 +1,7 @@
-eden-cli/eden-0.6.1-linux-amd64:
-  size: 8695650
-  object_id: a18840d5-4cfa-433e-4701-7c5058b89d5c
-  sha: 6313f5f078d60028d46f4604e2c148b3d6f96d30
+eden-cli/eden-0.7.2-linux-amd64:
+  size: 9172737
+  object_id: b858636c-f253-4cf1-403f-7a0d03386b65
+  sha: sha256:7696cb2bb860420fdb112aa5d7f07bc6be539808232bb532320d1106460b8d0e
 jq/jq-linux64-1.5:
   size: 3027945
   object_id: ebcc7c81-8667-4f1d-6fbf-62fef3347153
