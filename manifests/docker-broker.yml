@@ -137,9 +137,9 @@ releases:
   url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/docker/docker-35.3.2-ubuntu-xenial-456.12-20190820-044530-513903407-20190820044537.tgz
   version: 35.3.2
 - name: cf-containers-broker
-  sha1: a90ee9fe04678d50201b9e43a5aaadc1a1303867
+  sha1: b85189a85a3c79453390732ff31bac7353de903a
   stemcell:
     os: ubuntu-xenial
     version: "456.12"
-  url: https://github.com/cloudfoundry-community/cf-containers-broker-boshrelease/releases/download/v1.0.5/cf-containers-broker-1.0.5.tgz
+  url: https://s3.amazonaws.com/cf-containers-broker-boshrelease/compiled-releases/cf-containers-broker/cf-containers-broker-1.0.5-ubuntu-xenial-456.12-20190820-060639-613717402-20190820060642.tgz
   version: 1.0.5
