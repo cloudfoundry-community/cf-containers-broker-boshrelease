@@ -13,7 +13,7 @@ meta:
 
   image:
     name: starkandwayne/concourse-ruby
-    tag: 2.4
+    tag: 2.5
 
   git:
     email:  ((git-commit-email))
