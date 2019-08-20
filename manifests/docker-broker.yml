@@ -12,7 +12,7 @@ instance_groups:
   azs: [z1]
   instances: 1
   vm_type: minimal
-  stemcell: trusty
+  stemcell: xenial
   networks: [{name: default}]
   jobs:
   - name: subway-broker
@@ -34,7 +34,7 @@ instance_groups:
   instances: 1
   persistent_disk: 65536
   vm_type: minimal
-  stemcell: trusty
+  stemcell: xenial
   networks: [{name: default}]
   jobs:
   - name: docker
@@ -64,7 +64,7 @@ instance_groups:
   lifecycle: errand
   instances: 1
   vm_type: minimal
-  stemcell: trusty
+  stemcell: xenial
   networks: [{name: default}]
   jobs:
   - name: sanity-test-broker
