@@ -1,0 +1,45 @@
+name: cf-containers-broker
+version: 1.0.4
+commit_hash: 5811d6e
+uncommitted_changes: false
+jobs:
+- name: cf-containers-broker
+  version: 5fd9cf4fce2e8ff8a9fd69f32eb85d7a33ec586d9bd0aec6790854f11cb2daa1
+  fingerprint: 5fd9cf4fce2e8ff8a9fd69f32eb85d7a33ec586d9bd0aec6790854f11cb2daa1
+  sha1: sha256:86e8af99d579f835cd58f6b9b1e0b03ed661509dc5a82e2850cf5d246bb8c1c0
+  packages:
+  - ruby-2.4.6-r0.16.0
+  - cf-containers-broker
+- name: sanity-test-broker
+  version: 4c48a46a740b3dfb55731da241e0bd66ba49df1ae303c9084cc6bbd617656b86
+  fingerprint: 4c48a46a740b3dfb55731da241e0bd66ba49df1ae303c9084cc6bbd617656b86
+  sha1: sha256:5f338a75898986e7d73cbbedcd3e3b522e0745ba53e0e7c690c23f5812d08b6f
+  packages:
+  - jq
+  - eden-cli
+packages:
+- name: cf-containers-broker
+  version: b61a4b8f462f05551fa57e5e284680488d136720317161de5dd3ee6db8f1c2cf
+  fingerprint: b61a4b8f462f05551fa57e5e284680488d136720317161de5dd3ee6db8f1c2cf
+  sha1: sha256:00a22cf3acbe3d6df949185aa48f0ebd18d2e35429a52f00d0ac8666ded1c9c3
+  dependencies:
+  - ruby-2.4.6-r0.16.0
+- name: eden-cli
+  version: b1b662b23d8c89091ac4156661a04356b045ad6cad9431e6fe74a7c0b0d3b8b5
+  fingerprint: b1b662b23d8c89091ac4156661a04356b045ad6cad9431e6fe74a7c0b0d3b8b5
+  sha1: sha256:3c9352dddf6557a65070e99deb86064a988babff6f1e9182547f3477cd6f1b77
+  dependencies: []
+- name: jq
+  version: 1a127edf8a049eeb737affce428138f0eb2005afb08fe62108746b58f2f387eb
+  fingerprint: 1a127edf8a049eeb737affce428138f0eb2005afb08fe62108746b58f2f387eb
+  sha1: sha256:243192d28a90afdfcae4d31f11babfa6f60b53658ce22a093efd90528c6dcd43
+  dependencies: []
+- name: ruby-2.4.6-r0.16.0
+  version: c24971a29319aa3b84ab520498b144379dcfce1b44643f5d22d4b2533e7e11ac
+  fingerprint: c24971a29319aa3b84ab520498b144379dcfce1b44643f5d22d4b2533e7e11ac
+  sha1: sha256:4999dacdeee2f0a06040546327b680266cc5650b3b62b90b32104a741b221506
+  dependencies: []
+license:
+  version: b3880e70c9ea0c7b10a9fd6cbb651d74e5c88076396e8532215a933d51a7fa1a
+  fingerprint: b3880e70c9ea0c7b10a9fd6cbb651d74e5c88076396e8532215a933d51a7fa1a
+  sha1: sha256:135f2904b3ef847a62d9c5cd2fe7f0ffda2d17b8df6e3dbbeced950f1b8aa9b1
